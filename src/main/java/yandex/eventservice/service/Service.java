@@ -1,4 +1,4 @@
-package service;
+package yandex.eventservice.service;
 
 @org.springframework.stereotype.Service
 public abstract class Service<T> {

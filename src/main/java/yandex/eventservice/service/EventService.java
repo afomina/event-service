@@ -1,12 +1,13 @@
-package service;
+package yandex.eventservice.service;
 
-import domain.Event;
-import domain.repository.EventRepository;
+import yandex.eventservice.domain.Event;
+import yandex.eventservice.domain.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 
+@org.springframework.stereotype.Service
 public class EventService extends Service<Event> {
     @Autowired
     EventRepository eventRepository;
