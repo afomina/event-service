@@ -24,7 +24,8 @@ public class EventController extends RestController {
     }
 
     @GetMapping
-    public BigInteger getEvents(@RequestParam Integer minutes) {
-        return eventService.countLast(minutes);
+    public BigInteger getEvents(@RequestParam(required = false, defaultValue = "0") Integer minutes,
+                                @RequestParam(required = false, defaultValue = "0") Integer hours) {
+        return eventService.countLast(hours * 60 + minutes);
     }
 }
