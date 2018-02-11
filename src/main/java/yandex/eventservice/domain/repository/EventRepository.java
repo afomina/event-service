@@ -1,5 +1,6 @@
 package yandex.eventservice.domain.repository;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import yandex.eventservice.domain.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,5 +12,6 @@ import java.time.LocalDateTime;
 @Repository
 @Component
 public interface EventRepository extends JpaRepository<Event, BigInteger> {
+    @Cacheable("eventCount")
     BigInteger countEventsByDateAfter(LocalDateTime date);
 }
