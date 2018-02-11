@@ -10,7 +10,7 @@ import org.springframework.core.env.Environment;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-@Configuration
+//@Configuration
 public class DatabaseConfiguration {
     @Autowired
     private Environment env;
@@ -21,12 +21,7 @@ public class DatabaseConfiguration {
         dataSource.setDriverClass(env.getProperty("jdbc.connection.driver_class"));
         dataSource.setJdbcUrl(env.getProperty("jdbc.connection.url"));
         dataSource.setDataSourceName("event-service");
-//        dataSource.setProperties(new Properties() {
-//            {
-//                setProperty("user", env.getProperty("jdbc.connection.username"));
-//                setProperty("password", env.getProperty("jdbc.connection.password"));
-//            }
-//        });
+        dataSource.setProperties(hibernateProperties());
         dataSource.setUser(env.getProperty("jdbc.connection.username"));
         dataSource.setPassword(env.getProperty("jdbc.connection.password"));
         return dataSource;
