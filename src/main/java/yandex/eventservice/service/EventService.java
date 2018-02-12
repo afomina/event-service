@@ -1,23 +1,27 @@
 package yandex.eventservice.service;
 
+import yandex.eventservice.cache.EventCache;
 import yandex.eventservice.domain.Event;
 import yandex.eventservice.domain.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigInteger;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @org.springframework.stereotype.Service
 public class EventService extends Service<Event> {
     @Autowired
-    EventRepository eventRepository;
+    EventCache cache;
 
     @Override
-    public Event save(Event event) {
-        return eventRepository.save(event);
+    public void save(Event event) {
+        cache.store(event);
     }
 
-    public BigInteger countLast(Integer minutes) {
-        return eventRepository.countEventsByDateAfter(LocalDateTime.now().minusMinutes(minutes));
+    public Long countLast(Integer minutes) {
+        return cache.count(Timestamp.valueOf(LocalDateTime.now().minusMinutes(minutes)).getTime());
     }
+
+//    public Long countByDateAfter()
 }

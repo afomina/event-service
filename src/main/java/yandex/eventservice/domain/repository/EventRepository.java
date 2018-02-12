@@ -13,5 +13,5 @@ import java.time.LocalDateTime;
 @Component
 public interface EventRepository extends JpaRepository<Event, BigInteger> {
     @Cacheable("eventCount")
-    BigInteger countEventsByDateAfter(LocalDateTime date);
+    Long countEventsByDateAfter(LocalDateTime date);
 }

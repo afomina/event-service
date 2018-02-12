@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Table
 @Entity
-public class Event {
+public class Event implements Comparable<Event> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,5 +33,10 @@ public class Event {
 
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    @Override
+    public int compareTo(Event o) {
+        return date.compareTo(o.date);
     }
 }

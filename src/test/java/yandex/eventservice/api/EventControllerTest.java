@@ -44,6 +44,6 @@ public class EventControllerTest {
         logger.log(Level.WARNING, String.format("Events registered %s", end.toString()));
         LocalDateTime totalTime = new Timestamp(Timestamp.valueOf(end).getTime() - Timestamp.valueOf(start).getTime()).toLocalDateTime();
         logger.log(Level.WARNING, String.format("Total time %s", totalTime.toString()));
-        assertThat(restTemplate.getForObject("http://localhost:8080/event?minutes=" + (totalTime.getMinute() + 1), BigInteger.class), equalTo(BigInteger.valueOf(EVENT_AMOUNT)));
+        assertThat(restTemplate.getForObject("http://localhost:" + port + "/event?minutes=" + (totalTime.getMinute() + 1), Long.class), equalTo(EVENT_AMOUNT));
     }
 }
