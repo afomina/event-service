@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 
 @org.springframework.stereotype.Service
 public class EventService extends Service<Event> {
+    
     @Autowired
     EventCache cache;
 
@@ -23,5 +24,4 @@ public class EventService extends Service<Event> {
         return cache.count(Timestamp.valueOf(LocalDateTime.now().minusMinutes(minutes)).getTime());
     }
 
-//    public Long countByDateAfter()
 }
