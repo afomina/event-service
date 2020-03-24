@@ -5,12 +5,21 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * Annotation for limiting requests to api method
+ */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface LimitRequests {
 
-    String period() default "PT1H";
+    /**
+     * Period of time
+     */
+    String period();
 
-    int requests() default 100;
+    /**
+     * Amount of requests allowed
+     */
+    int requests();
 
 }

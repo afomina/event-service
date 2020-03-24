@@ -1,6 +1,6 @@
 package andrianova.requestcounter.service;
 
-import andrianova.requestcounter.domain.Event;
+import andrianova.requestcounter.domain.AccessHistoryItem;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -15,24 +15,27 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 /**
- *
+ * Aspect for {@link LimitRequests} annotation
  */
 @Aspect
 @Component
 public class LimitRequestsAspect {
 
     @Autowired
-    private EventService eventService;
+    private AccessHistoryService eventService;
 
+    /**
+     * Counts number of requests with request ip address.
+     * If request limit exceeded, returns Http response 429, otherwise proceed with the method.
+     */
     @Around("@annotation(LimitRequests)")
-    public Object countRequests(ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object limitRequests(ProceedingJoinPoint joinPoint) throws Throwable {
         LimitRequests limitSettings = ((MethodSignature) joinPoint.getSignature()).getMethod().getAnnotation(LimitRequests.class);
         Duration period = Duration.parse(limitSettings.period());
-
         String userIp = ((HttpServletRequest) joinPoint.getArgs()[0]).getRemoteAddr();
 
         if (eventService.isRequestAllowed(userIp, period, limitSettings.requests())) {
-            eventService.save(new Event(LocalDateTime.now(), userIp));
+            eventService.save(new AccessHistoryItem(LocalDateTime.now(), userIp));
             return joinPoint.proceed();
         }
 

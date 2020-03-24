@@ -7,21 +7,34 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 
+/**
+ * Stores information about each access of specified user to api method
+ */
 @Table
 @Entity
-public class Event implements Comparable<Event> {
+public class AccessHistoryItem implements Comparable<AccessHistoryItem> {
 
+    /**
+     * Unique identifier
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Access date and time
+     */
     private LocalDateTime date;
 
+    /**
+     * User ip address
+     */
     private String ip;
 
-    public Event() {}
+    public AccessHistoryItem() {
+    }
 
-    public Event(LocalDateTime date, String ip) {
+    public AccessHistoryItem(LocalDateTime date, String ip) {
         this.date = date;
         this.ip = ip;
     }
@@ -51,7 +64,7 @@ public class Event implements Comparable<Event> {
     }
 
     @Override
-    public int compareTo(Event o) {
+    public int compareTo(AccessHistoryItem o) {
         return date.compareTo(o.date);
     }
 }
