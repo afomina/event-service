@@ -1,4 +1,4 @@
-package yandex.eventservice.api;
+package andrianova.requestcounter.api;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.logging.Level;

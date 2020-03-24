@@ -1,22 +1,29 @@
-package yandex.eventservice.domain;
+package andrianova.requestcounter.domain;
 
-import javax.persistence.*;
-import java.math.BigInteger;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Table
 @Entity
 public class Event implements Comparable<Event> {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private LocalDateTime date;
 
+    private String ip;
+
     public Event() {}
 
-    public Event(LocalDateTime date) {
+    public Event(LocalDateTime date, String ip) {
         this.date = date;
+        this.ip = ip;
     }
 
     public Long getId() {
@@ -33,6 +40,14 @@ public class Event implements Comparable<Event> {
 
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
     @Override

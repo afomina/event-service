@@ -1,4 +1,4 @@
-package yandex.eventservice.domain.converter;
+package andrianova.requestcounter.domain.converter;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
